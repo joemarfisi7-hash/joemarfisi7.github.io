@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joe Marfisi — Finance & Investment Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F8F6F1;
+    --ink: #1A1814;
+    --ink-mid: #4A4640;
+    --ink-muted: #8A8680;
+    --ink-faint: #C4C0B8;
+    --rule: #D8D4CC;
+    --accent: #1A1814;
+    --pass-bg: #F9EDED;
+    --pass-text: #8B2020;
+    --buy-bg: #EDF4E8;
+    --buy-text: #2E6010;
+    --hold-bg: #FBF3E4;
+    --hold-text: #7A4A08;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(248,246,241,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--rule);
+    padding: 0 5vw;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── LAYOUT ── */
+  main { padding-top: 60px; }
+
+  section {
+    padding: 5rem 5vw;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-rule {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 0.5px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-rule::after {
+    content: '';
+    flex: 1;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: calc(100vh - 60px);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 6rem;
+    align-items: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(46px, 6vw, 72px);
+    font-weight: 400;
+    line-height: 1.08;
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--ink-mid);
+  }
+
+  .hero-bio {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--ink-mid);
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2.5rem;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border: 0.5px solid var(--rule);
+    color: var(--ink-muted);
+    border-radius: 1px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.6; }
+
+  /* Hero right column */
+  .hero-stats {
+    border-left: 0.5px solid var(--rule);
+    padding-left: 4rem;
+  }
+  .stat {
+    padding: 1.5rem 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .stat:first-child { padding-top: 0; }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+  .stat-detail {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-mid);
+  }
+
+  /* ── WORK ── */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 0.5px solid var(--rule);
+  }
+
+  .work-card {
+    background: var(--cream);
+    padding: 2rem 2rem 1.75rem;
+    transition: background 0.2s;
+  }
+  .work-card:hover { background: #F2EFE8; }
+
+  .work-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  .ticker {
+    font-family: 'EB Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .rec-badge {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 1px;
+    margin-top: 4px;
+  }
+  .rec-pass { background: var(--pass-bg); color: var(--pass-text); }
+  .rec-buy  { background: var(--buy-bg);  color: var(--buy-text);  }
+  .rec-hold { background: var(--hold-bg); color: var(--hold-text); }
+
+  .company-name {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    margin-bottom: 4px;
+  }
+  .card-type {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+  }
+  .card-note {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  .work-card-placeholder {
+    background: var(--cream);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    cursor: default;
+    border: none;
+  }
+  .placeholder-icon {
+    width: 32px;
+    height: 32px;
+    border: 0.5px solid var(--rule);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    color: var(--ink-faint);
+    font-size: 18px;
+  }
+  .placeholder-text {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+    padding: 1.75rem 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .exp-item:first-child { border-top: 0.5px solid var(--rule); }
+  .exp-date {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ink-faint);
+    padding-top: 3px;
+  }
+  .exp-role {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+  .exp-org {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    margin-bottom: 8px;
+  }
+  .exp-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .cert {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    padding: 7px 16px;
+    border: 0.5px solid var(--rule);
+    color: var(--ink-mid);
+    border-radius: 1px;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    border-top: 0.5px solid var(--rule);
+    background: var(--ink);
+    color: var(--cream);
+    max-width: 100%;
+    padding: 5rem 5vw;
+  }
+  #contact .section-rule {
+    color: rgba(248,246,241,0.3);
+    border-bottom-color: rgba(248,246,241,0.12);
+  }
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .contact-heading {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .contact-heading em { font-style: italic; opacity: 0.6; }
+  .contact-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(248,246,241,0.55);
+    margin-bottom: 2.5rem;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+  .contact-links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: rgba(248,246,241,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--cream); }
+  .contact-link svg {
+    width: 15px;
+    height: 15px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 1.5rem 5vw;
+    border-top: 0.5px solid rgba(248,246,241,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(248,246,241,0.3);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .fade-up.d1 { animation-delay: 0.1s; }
+  .fade-up.d2 { animation-delay: 0.25s; }
+  .fade-up.d3 { animation-delay: 0.4s; }
+  .fade-up.d4 { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #hero {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .hero-stats { border-left: none; padding-left: 0; border-top: 0.5px solid var(--rule); padding-top: 2rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Joe Marfisi</span>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow fade-up d1">Finance & Investment Analyst</p>
+      <h1 class="fade-up d2">Equity Research<br><em>&amp; Investment</em><br>Analysis</h1>
+      <p class="hero-bio fade-up d3">Finance major at the University of Nebraska–Lincoln with hands-on experience in equity research, venture capital due diligence, and financial modeling. Targeting boutique M&A, real estate advisory, and long-only asset management — with Los Angeles as a long-term destination.</p>
+      <div class="hero-tags fade-up d3">
+        <span class="tag">Equity Research</span>
+        <span class="tag">DCF Modeling</span>
+        <span class="tag">M&A Advisory</span>
+        <span class="tag">Real Estate</span>
+        <span class="tag">LBO Analysis</span>
+        <span class="tag">VC Due Diligence</span>
+      </div>
+      <a href="#work" class="hero-cta fade-up d4">View research work →</a>
+    </div>
+
+    <div class="hero-stats fade-up d3">
+      <div class="stat">
+        <div class="stat-label">Education</div>
+        <div class="stat-value">University of Nebraska–Lincoln</div>
+        <div class="stat-detail">B.S. Finance, English Minor · Graduating Dec 2026</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Certifications</div>
+        <div class="stat-value">Wall Street Prep</div>
+        <div class="stat-detail">DCF · 3-Statement · M&A · LBO · Trading Comps</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Current Location</div>
+        <div class="stat-value">Lincoln, Nebraska</div>
+        <div class="stat-detail">Open to nationwide opportunities · Target: Los Angeles</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Target Roles</div>
+        <div class="stat-value">Analyst · Associate</div>
+        <div class="stat-detail">Boutique M&A · Real Estate Advisory · Family Office</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" style="padding-bottom: 0;">
+    <div class="section-rule">Research &amp; Modeling Work</div>
+    <div class="work-grid">
+
+      <div class="work-card">
+        <div class="work-card-header">
+          <div class="ticker">AGX</div>
+          <span class="rec-badge rec-pass">Pass</span>
+        </div>
+        <div class="company-name">Argan, Inc.</div>
+        <div class="card-type">Equity Research · Full DCF · Relative Valuation</div>
+        <p class="card-note">Bottom-up DCF and peer comps analysis on a power plant engineering firm levered to AI/data center infrastructure demand. DCF implied ~$518 vs. ~$575 market price. Thesis weighed $2.9B project backlog and fortress balance sheet against a stretched valuation premium. Issued a Pass at current prices.</p>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card-header">
+          <div class="ticker">RTX</div>
+          <span class="rec-badge rec-buy">Buy</span>
+        </div>
+        <div class="company-name">Raytheon Technologies</div>
+        <div class="card-type">Equity Pitch · DCF · Sensitivity Analysis</div>
+        <p class="card-note">Full equity pitch with DCF model and multi-scenario sensitivity analysis. Incorporated forward earnings impact of the Pratt & Whitney powder metal contamination crisis and GTF engine fleet inspection program. Built as primary work sample for internship applications. Issued Buy with margin of safety.</p>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card-header">
+          <div class="ticker">AAPL</div>
+          <span class="rec-badge rec-hold">In Progress</span>
+        </div>
+        <div class="company-name">Apple Inc.</div>
+        <div class="card-type">DCF Model · FY2025 10-K Analysis</div>
+        <p class="card-note">Bottom-up DCF model built from the FY2025 10-K. Analysis focused on services segment growth trajectory, hardware replacement cycle dynamics, and the impact of the capital return program on intrinsic value per share.</p>
+      </div>
+
+      <div class="work-card-placeholder">
+        <div class="placeholder-icon">+</div>
+        <p class="placeholder-text">LBO Model<br>Coming soon</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-rule">Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-date">2024 – Present</div>
+      <div>
+        <div class="exp-role">Investment Analyst</div>
+        <div class="exp-org">Husker Venture Fund · Lincoln, NE</div>
+        <div class="exp-desc">VC due diligence, company valuation, and term sheet review across early-stage deal flow. Developed investment memos and presented buy/pass recommendations to fund leadership. Built financial models across multiple sectors and contributed to portfolio monitoring.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2024</div>
+      <div>
+        <div class="exp-role">Finance Intern</div>
+        <div class="exp-org">Hope Ventures · Lincoln, NE</div>
+        <div class="exp-desc">Built financial models and performed cash flow analysis supporting investment decisions. Contributed to portfolio company financial review and reporting. Developed three-statement models and variance analysis for operational planning.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2023 – Present</div>
+      <div>
+        <div class="exp-role">Finance Coursework</div>
+        <div class="exp-org">University of Nebraska–Lincoln</div>
+        <div class="exp-desc">FINA 461 — Capital structure, WACC, APV, Hamada equation, real options, capital budgeting, and unequal lives analysis. SCMA 350 — Linear programming, sensitivity analysis, regression, and forecasting via Excel Solver. Applied learning through the Facebook IPO case, RTX equity pitch, and original financial models.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-rule">Certifications &amp; Skills</div>
+    <div class="certs-grid">
+      <span class="cert">WSP — Discounted Cash Flow Modeling</span>
+      <span class="cert">WSP — Three-Statement Modeling</span>
+      <span class="cert">WSP — M&A / Merger Modeling</span>
+      <span class="cert">WSP — Leveraged Buyout Modeling</span>
+      <span class="cert">WSP — Trading Comparables</span>
+      <span class="cert">Microsoft Excel — Advanced</span>
+      <span class="cert">Financial Statement Analysis</span>
+      <span class="cert">Capital Markets</span>
+    </div>
+  </section>
+
+</main>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-inner">
+    <div class="section-rule">Contact</div>
+    <h2 class="contact-heading">Let's connect<br><em>and talk finance.</em></h2>
+    <p class="contact-sub">Open to internship and full-time opportunities in M&A advisory, real estate investment, and asset management. Available for Summer and Fall 2026.</p>
+    <div class="contact-links">
+      <a href="mailto:joe.marfisi@huskers.unl.edu" class="contact-link">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        joe.marfisi@huskers.unl.edu
+      </a>
+      <a href="https://linkedin.com/in/joemarfisi" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="7" x2="8" y2="8"/><path d="M12 17v-4a2 2 0 0 1 4 0v4"/><line x1="12" y1="11" x2="12" y2="17"/></svg>
+        LinkedIn
+      </a>
+      <a href="#" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+        Resume
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-text">© 2026 Joe Marfisi</span>
+  <span class="footer-text">Finance Portfolio</span>
+</footer>
+
+</body>
+</html>
