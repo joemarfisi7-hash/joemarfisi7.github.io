@@ -69,43 +69,21 @@
   }
   .nav-links a:hover{ color:var(--ink); }
 
-  /* HAMBURGER MENU */
-  .nav-left{ display:flex; align-items:center; gap:1.1rem; position:relative; }
-  .menu-btn{
-    background:none; border:none; cursor:pointer; padding:0.4rem 0;
-    display:flex; flex-direction:column; gap:4px; width:20px;
-    -webkit-tap-highlight-color:transparent;
+  /* LIVE TICKER */
+  .ticker-strip{
+    border-bottom:1px solid var(--line);
+    background:var(--warm-white);
   }
-  .menu-btn span{
-    display:block; height:1.5px; width:100%; background:var(--ink);
-    transition:transform 0.25s ease, opacity 0.18s ease;
-    transform-origin:center;
+  .ticker-strip .tradingview-widget-container{
+    max-width:860px; margin:0 auto;
   }
-  .menu-btn[aria-expanded="true"] span:nth-child(1){ transform:translateY(5.5px) rotate(45deg); }
-  .menu-btn[aria-expanded="true"] span:nth-child(2){ opacity:0; }
-  .menu-btn[aria-expanded="true"] span:nth-child(3){ transform:translateY(-5.5px) rotate(-45deg); }
 
-  .menu-panel{
-    position:absolute; top:calc(100% + 0.55rem); left:0;
-    min-width:220px; background:var(--warm-white);
-    border:1px solid var(--line); border-radius:8px;
-    padding:1.25rem 1.5rem 1.4rem;
-    opacity:0; transform:translateY(-6px); pointer-events:none;
-    transition:opacity 0.18s ease, transform 0.18s ease;
-    box-shadow:0 10px 30px rgba(44,42,37,0.07);
+  /* VALUATION SNAPSHOT LINE */
+  .val-line{
+    font-family:var(--mono); font-size:0.74rem; color:var(--muted);
+    letter-spacing:0.01em; margin:-0.5rem 0 1.5rem;
   }
-  .menu-panel.open{ opacity:1; transform:translateY(0); pointer-events:auto; }
-  .menu-eyebrow{
-    font-family:var(--mono); font-size:0.66rem; letter-spacing:0.08em;
-    text-transform:uppercase; color:var(--faint); margin-bottom:0.85rem;
-  }
-  .menu-panel ul{ list-style:none; display:flex; flex-direction:column; gap:0.05rem; }
-  .menu-panel a{
-    font-family:var(--serif); font-size:1.05rem; color:var(--ink);
-    text-decoration:none; display:block; padding:0.4rem 0;
-    transition:color 0.16s, padding-left 0.16s;
-  }
-  .menu-panel a:hover{ color:var(--muted); padding-left:0.3rem; }
+  .val-line .k{ color:var(--faint); }
 
   /* HERO */
   .hero{ padding:6.5rem 0 4.5rem; }
@@ -177,10 +155,6 @@
 
   .links{ display:flex; flex-direction:column; gap:0.8rem; }
   .link-row{ display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
-  .link-cap{
-    font-family:var(--mono); font-size:0.66rem; letter-spacing:0.06em;
-    text-transform:uppercase; color:var(--faint); width:100%; margin-bottom:0.05rem;
-  }
   a.doc{
     font-size:0.82rem; color:var(--ink); text-decoration:none;
     border:1px solid var(--line); border-radius:6px;
@@ -256,21 +230,7 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="nav-left">
-      <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel">
-        <span></span><span></span><span></span>
-      </button>
-      <a href="#" class="nav-name">JOE MARFISI</a>
-      <div class="menu-panel" id="menu-panel" role="menu">
-        <div class="menu-eyebrow">Explore</div>
-        <ul>
-          <li><a href="#" role="menuitem">Notes</a></li>
-          <li><a href="#" role="menuitem">Reading</a></li>
-          <li><a href="#" role="menuitem">Writing</a></li>
-          <li><a href="#" role="menuitem">Archive</a></li>
-        </ul>
-      </div>
-    </div>
+    <a href="#" class="nav-name">JOE MARFISI</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -279,6 +239,27 @@
     </ul>
   </div>
 </nav>
+
+<!-- LIVE TICKER — TradingView ticker tape (free embed, no key) -->
+<div class="ticker-strip">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        { "proName": "NYSE:AGX", "title": "AGX" },
+        { "proName": "NYSE:RTX", "title": "RTX" },
+        { "proName": "NASDAQ:AAPL", "title": "AAPL" }
+      ],
+      "showSymbolLogo": false,
+      "colorTheme": "light",
+      "isTransparent": true,
+      "displayMode": "regular",
+      "locale": "en"
+    }
+    </script>
+  </div>
+</div>
 
 <header class="hero wrap">
   <p class="eyebrow">Equity Research · Financial Modeling</p>
@@ -320,6 +301,7 @@
         <div class="card-co">Argan, Inc.</div>
         <div class="card-line">Apr 5, 2026 <span class="dot">·</span> Full DCF <span class="dot">·</span> Relative Valuation</div>
         <p class="body">Bottom-up DCF and peer comps on a power-plant engineering firm levered to AI and data-center infrastructure demand. DCF implied roughly $518 against a $575 market price. The thesis weighed a $2.9B project backlog and a fortress balance sheet against a stretched valuation premium, and landed on a Pass at current prices.</p>
+        <div class="val-line"><span class="k">At valuation · Apr 5, 2026</span> &nbsp;Price $575.00 <span class="dot">·</span> DCF implied ~$518</div>
         <div class="links">
           <div class="link-row">
             <a class="doc" href="AGX_Pitch_Deck.pptx" download>Pitch Deck<span class="arr">↓</span></a>
@@ -339,14 +321,12 @@
         <div class="card-co">Raytheon Technologies</div>
         <div class="card-line">Feb 2026 <span class="dot">·</span> DCF <span class="dot">·</span> Relative Val <span class="dot">·</span> Sensitivity Analysis</div>
         <p class="body">Full equity pitch with a DCF and multi-scenario sensitivity analysis. Built in the forward earnings impact of the Pratt &amp; Whitney powder-metal contamination crisis and the GTF engine fleet inspection program. Primary work sample for internship applications. DCF target of $201.76 against a $198.09 market price landed on a Hold.</p>
+        <div class="val-line"><span class="k">At valuation · Feb 2026</span> &nbsp;Price $198.09 <span class="dot">·</span> DCF target $201.76</div>
         <div class="links">
           <div class="link-row">
             <a class="doc" href="RTX_Presentation.pptx" download>Pitch Presentation<span class="arr">↓</span></a>
             <a class="doc" href="RTX_DCF_Model.xlsx" download>DCF Model<span class="arr">↓</span></a>
-          </div>
-          <div class="link-row">
-            <span class="link-cap">Relative Valuation</span>
-            <a class="doc" href="RTX_Comps_Model.xlsx" download>Relative Valuationl<span class="arr">↓</span></a>
+            <a class="doc" href="RTX_Comps_Model.xlsx" download>Relative Valuation<span class="arr">↓</span></a>
             <a class="doc" href="RTX_Relative_Valuation.docx" download>Written Analysis<span class="arr">↓</span></a>
           </div>
         </div>
@@ -444,35 +424,6 @@
     <span class="foot-copy">&copy; 2026 JOE MARFISI</span>
   </div>
 </footer>
-
-<script>
-  (function(){
-    const btn = document.querySelector('.menu-btn');
-    const panel = document.getElementById('menu-panel');
-    if(!btn || !panel) return;
-
-    const close = () => {
-      panel.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    };
-    const open = () => {
-      panel.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
-    };
-
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      panel.classList.contains('open') ? close() : open();
-    });
-    document.addEventListener('click', (e) => {
-      if(!panel.contains(e.target) && !btn.contains(e.target)) close();
-    });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape') close();
-    });
-    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-  })();
-</script>
 
 </body>
 </html>
